@@ -8,6 +8,42 @@ including:
 - Fetch metadata headers
 - Trusted Types
 
+# 🖥️ Usage
+
+>WIP, package not currently published. 
+
+To install the bundle on a project, add the following lines to your composer.json
+
+```json
+"require": {
+    "ise/web-security-bundle": "main"
+},
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/GoogleChromeLabs/IseWebSecurityBundle.git"
+    }
+]
+```
+
+## Config
+
+>WIP, Config will change over time
+
+The config within your Symfony project will control how the bundle works in your Application.
+Below, you will find an example config for the current state of the project that will activate
+the majority of the features.
+
+>ise_web_security.yaml
+
+```yaml
+ise_web_security:
+    coop:
+        active: true
+    fetch_metadata:
+        active: true
+```
+
 ## 🤝 Contributing
 
 Issues and pull requests are always welcome. For details, see
