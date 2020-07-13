@@ -17,7 +17,8 @@
     "require": {
         "symfony/config": "^4.3 || ^5.1",
         "symfony/dependency-injection": "^4.3 ||^5.1",
-        "symfony/http-kernel": "^4.3 ||^5.1"
+        "symfony/http-kernel": "^4.3 ||^5.1",
+        "symfony/framework-bundle": "^4.3 || ^5.1"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^4.3 ||^5.1"
