@@ -2,11 +2,11 @@
     "name": "ise/web-security-bundle",
     "description": "Web security bundle for Symfony create by google OSS",
     "type": "symfony-bundle",
-    "license": "MIT",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "Matthew Henry",
-            "email": "henrym2@tcd.ie"
+            "email": "matthewhenry@google.com"
         }
     ],
     "autoload" : {
@@ -15,12 +15,11 @@
         }
     },
     "require": {
-        "php": "^7.2.9",
-        "symfony/config": "^5.1",
-        "symfony/dependency-injection": "^5.1",
-        "symfony/http-kernel": "^5.1"
+        "symfony/config": "^4.3 || ^5.1",
+        "symfony/dependency-injection": "^4.3 ||^5.1",
+        "symfony/http-kernel": "^4.3 ||^5.1"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^5.1"
+        "symfony/phpunit-bridge": "^4.3 ||^5.1"
     }
 }

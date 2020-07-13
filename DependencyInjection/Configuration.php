@@ -13,12 +13,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('ise_web_security', 'array');
 
-        if (method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode();
-        } else {
-            // BC for symfony/config < 4.2
-            $rootNode = $treeBuilder->root('ise_web_security');
-        }
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
