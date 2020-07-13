@@ -15,7 +15,7 @@ class IseWebSecurityExtension extends Extension
 
         $config = $this->processConfiguration($configuration, $configs);
         
-        $container->setParameter('ise_security.cross_origin.active', $config['cross_origin']['active']);
+        $container->setParameter('ise_security.coop.active', $config['coop']['active']);
         $container->setParameter('ise_security.fetch_metadata.active', $config['fetch_metadata']['active']);
         
 	    $loader = new YamlFileLoader(

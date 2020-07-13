@@ -23,7 +23,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('report_uri')->end()
-                ->arrayNode('cross_origin')
+                ->arrayNode('coop')
                     ->children()
                         ->booleanNode('active')->defaultFalse()->end()
                     ->end()

@@ -13,7 +13,7 @@ class ResponseSubscriber implements EventSubscriberInterface
     private $active;
     public function __construct(ContainerInterface $container)
     {
-        $this->active = $container->getParameter('ise_security.cross_origin.active'); 
+        $this->active = $container->getParameter('ise_security.coop.active'); 
     }
 
     public static function getSubscribedEvents()
