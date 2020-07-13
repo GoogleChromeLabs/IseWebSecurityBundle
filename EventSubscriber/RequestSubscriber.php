@@ -16,7 +16,7 @@ class RequestSubscriber implements EventSubscriberInterface
     public function __construct(ContainerInterface $container)
     {
         $this->active = $container->getParameter('ise_security.fetch_metadata.active');
-        $this->active = []; //Stub until Config is constructed
+        $this->corsEndpoints = []; //Stub until Config is constructed
     }
     public static function getSubscribedEvents()
     {
@@ -31,21 +31,21 @@ class RequestSubscriber implements EventSubscriberInterface
     {
             $request = $event->getRequest();
             if($this->active) {
-                if(!$this->allowRequest($request)){
+                if(!$this->applyFetchMetadataPolicy($request)){
                     $response = new Response('', Response::HTTP_UNAUTHORIZED);
                     $response->headers->set('Vary', 'sec-fetch-site');
                     $event->setResponse($response);
                 }
             }
     }
-    /**
+    /** !!Work in progress!!
      * Method to check the current request against base Fetch Metadata security guidelines.
      * Guide based on https://web.dev/fetch-metadata/ article
      *
      * @param Request $req 
      * @return void
      */
-    private function allowRequest(Request $req) 
+    private function applyFetchMetadataPolicy(Request $req) 
     {
         $headers = $req->headers;
         if(!$headers->get('sec-fetch-site')){

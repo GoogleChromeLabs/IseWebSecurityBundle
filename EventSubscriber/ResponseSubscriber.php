@@ -27,6 +27,7 @@ class ResponseSubscriber implements EventSubscriberInterface
 
     public function responseEvent(ResponseEvent $event)
     {
+        //!WIP, to be broken out into policy handler class
         $response = $event->getResponse();
         if($this->active) {
             $response->headers->set("Cross-Origin-Resource-Policy", "same-origin");
