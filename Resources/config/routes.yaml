@@ -1,0 +1,9 @@
+report_route:
+  path: /ise/report
+  controller: Ise\WebSecurityBundle\Controller\ReportController::report
+  condition: "'%kernel.environment%' === 'dev'"
+
+stored_report_route:
+  path: /ise/reports
+  controller: Ise\WebSecurityBundle\Controller\ReportController::index
+  condition: "'%kernel.environment%' == 'dev'"

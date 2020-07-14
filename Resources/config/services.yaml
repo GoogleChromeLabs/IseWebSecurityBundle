@@ -1,0 +1,8 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Ise\WebSecurityBundle\:
+      resource: '../../'
+      exclude: '../../{DependencyInjection,tests,vendor,DataCollector}'

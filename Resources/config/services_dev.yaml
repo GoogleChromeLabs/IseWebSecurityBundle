@@ -1,0 +1,17 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+  
+  Ise\WebSecurityBundle\DataCollector\ReportCollector:
+    public: true
+    tags:
+        -
+          name:     data_collector
+          template: '@IseWebSecurity/Collector/report.html.twig'
+          id:       'ise.web_security.report_collector'
+          priority: 300
+  
+  Ise\WebSecurityBundle\:
+      resource: '../../'
+      exclude: '../../{DependencyInjection,tests,vendor}'

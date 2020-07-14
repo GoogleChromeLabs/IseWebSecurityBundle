@@ -1,0 +1,26 @@
+{
+    "name": "ise/web-security-bundle",
+    "description": "Web security bundle for Symfony create by google OSS",
+    "type": "symfony-bundle",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Matthew Henry",
+            "email": "matthewhenry@google.com"
+        }
+    ],
+    "autoload" : {
+        "psr-4": {
+            "Ise\\WebSecurityBundle\\": ""
+        }
+    },
+    "require": {
+        "symfony/config": "^4.3 || ^5.1",
+        "symfony/dependency-injection": "^4.3 ||^5.1",
+        "symfony/http-kernel": "^4.3 ||^5.1",
+        "symfony/framework-bundle": "^4.3 || ^5.1"
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^4.3 ||^5.1"
+    }
+}
