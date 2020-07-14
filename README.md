@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/GoogleChromeLabs/IseWebSecurityBundle.svg?branch=main)](https://travis-ci.com/GoogleChromeLabs/IseWebSecurityBundle)
+
 # 🔐 IseWebSecurityBundle
 
 A Symfony bundle that implements best practice for security features,
