@@ -19,16 +19,19 @@ class IseWebSecurityFetchMetaTest extends TestCase
         $req = Request::create(
             '/blog'
         );
-        $requestEvent = $this->getMockBuilder(RequestEvent::class)
+
+        $kernel = $this->getMockBuilder(HttpKernelInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $requestEvent
-            ->expects($this->once())
-            ->method('getRequest')
-            ->willReturn(null);
+        $request = Request::create('/test');
+        $res = new RequestEvent(
+            $kernel,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST
+        );
 
-        $result = $requestSubscriber->requestEvent($requestEvent);
+        $result = $requestSubscriber->requestEvent($res);
         $this->assertNull($result);
     }
 
