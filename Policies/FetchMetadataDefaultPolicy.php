@@ -9,8 +9,8 @@ class FetchMetadataDefaultPolicy implements FetchMetadataPolicyInterface
 {
     /**
      * CorsEndpoints denotes the allowed cross origin endpoints as part of the Default Fetch metadata policy
-     *
      * @var array
+     * Example: [ '/images', '/api', '/health' ]
      */
     private $corsEndpoints;
 
