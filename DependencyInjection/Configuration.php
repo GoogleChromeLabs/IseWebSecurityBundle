@@ -24,7 +24,7 @@ class Configuration implements ConfigurationInterface
                         ->booleanNode('active')->defaultFalse()->end()
                     ->end()
                 ->end()
-                ->append($this->getFetchMetaData())
+                ->append($this->getFetchmetaData())
             ->end()
         ;
 
@@ -44,7 +44,7 @@ class Configuration implements ConfigurationInterface
         return $node;
     }
 
-    private function getFetchMetaData() {
+    private function getFetchmetaData() {
         $node = new ArrayNodeDefinition('fetch_metadata');
         $node->children()
             ->booleanNode('active')->defaultFalse()->end()

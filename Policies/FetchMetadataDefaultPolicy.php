@@ -19,7 +19,7 @@ class FetchMetadataDefaultPolicy implements FetchMetadataPolicyInterface
         $this->corsEndpoints = $corsEndpoints;
     }
     /**
-     * apllyPolicy Applies the default Fetch Metadata Policy as defined by https://web.dev/fetch-metadata/
+     * applyPolicy Applies the default Fetch Metadata Policy as defined by https://web.dev/fetch-metadata/
      *
      * @param Request $req
      * @return boolean
