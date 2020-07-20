@@ -11,6 +11,12 @@
             <directory suffix="Test.php">tests/</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">EventSubscriber/</directory>
+            <directory suffix=".php">Policies/</directory>
+        </whitelist>
+    </filter>
     <logging>
         <log type="coverage-clover" target="build/logs/clover.xml"/>
     </logging>
