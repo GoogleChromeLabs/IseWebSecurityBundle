@@ -41,10 +41,9 @@ the majority of the features.
 
 ```yaml
 ise_web_security:
-    coop:
-        active: true
-    fetch_metadata:
-        active: true
+        coop: true
+        fetch_metadata:
+                active: true
 ```
 
 ## 🤝 Contributing
