@@ -20,15 +20,15 @@ class IseWebSecurityExtension extends Extension
         $container->setParameter('ise_security.coop.active', $config['coop']);
         $container->setParameter('ise_security.fetch_metadata.active', $config['fetch_metadata']['active']);
         $loader = new YamlFileLoader(
-	    	$container,
-	    	new FileLocator(__DIR__.'/../Resources/config')
-	    );
+            $container,
+            new FileLocator(__DIR__.'/../Resources/config')
+        );
         $loader->load('services.yaml');
 
         $fetchMetaDataSubscriber = $container->getDefinition("ise_fetch_metadata.subscriber");
-        if($config['fetch_metadata']['fetch_metadata_policy'] !== null) {
+        if ($config['fetch_metadata']['fetch_metadata_policy'] !== null) {
             $fetchMetaDataSubscriber->setArgument(1, new Reference($config['fetch_metadata']['fetch_metadata_policy']));
-        } 
+        }
 
         $fetchMetaDataDefaultPolicy = $container->getDefinition("ise_fetch_metadata.default_policy");
         $fetchMetaDataDefaultPolicy->setArgument(1, $config['fetch_metadata']['allowed_endpoints']);
