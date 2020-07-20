@@ -15,7 +15,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('ise_web_security', 'array');
 
         $rootNode = $treeBuilder->getRootNode();
-//!Work in progress, config tree to be construced in Issues #7 and #3
+//!Work in progress, config tree to be constructed in Issues #7 and #3
         $rootNode
             ->children()
                 ->append($this->getReportConfig())
