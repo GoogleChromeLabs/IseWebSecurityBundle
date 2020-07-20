@@ -13,7 +13,6 @@
     </testsuites>
     <filter>
         <whitelist>
-            <directory suffix=".php">EventSubscriber/</directory>
             <directory suffix=".php">Policies/</directory>
         </whitelist>
     </filter>
