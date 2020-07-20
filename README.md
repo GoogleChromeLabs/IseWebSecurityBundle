@@ -18,7 +18,7 @@ To install the bundle on a project, add the following lines to your composer.jso
 
 ```json
 "require": {
-    "ise/web-security-bundle": "main"
+    "ise/web-security-bundle": "dev-main"
 },
 "repositories": [
     {

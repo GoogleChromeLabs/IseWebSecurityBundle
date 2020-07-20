@@ -1,3 +1,6 @@
+parameters:
+  fetch_metadata_policy: 
+
 services:
   _defaults:
     autowire: true
@@ -12,6 +15,21 @@ services:
           id:       'ise.web_security.report_collector'
           priority: 300
   
+  ise_fetch_metadata.subscriber:
+    class: Ise\WebSecurityBundle\EventSubscriber\FetchMetadataRequestSubscriber
+    arguments: 
+      $fetchMetadataPolicy: '@Ise\WebSecurityBundle\Policies\FetchMetadataDefaultPolicy'
+
+  Ise\WebSecurityBundle\EventSubscriber\FetchMetadataRequestSubscriber: '@ise_fetch_metadata.subscriber'
+
+  ise_fetch_metadata.default_policy:
+    class: Ise\WebSecurityBundle\Policies\FetchMetadataDefaultPolicy
+    arguments:
+      - $corsEndpoints
+
+  Ise\WebSecurityBundle\Policies\FetchMetadataDefaultPolicy: '@ise_fetch_metadata.default_policy'
+
+
   Ise\WebSecurityBundle\:
       resource: '../../'
       exclude: '../../{DependencyInjection,tests,vendor}'
