@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/GoogleChromeLabs/IseWebSecurityBundle.svg?branch=main)](https://travis-ci.com/GoogleChromeLabs/IseWebSecurityBundle)
+[![Coverage Status](https://coveralls.io/repos/github/GoogleChromeLabs/IseWebSecurityBundle/badge.svg?branch=ci)](https://coveralls.io/github/GoogleChromeLabs/IseWebSecurityBundle?branch=ci)
 
 # 🔐 IseWebSecurityBundle
 
