@@ -18,11 +18,10 @@ class IseWebSecurityExtension extends Extension
         $container->setParameter('ise_security.coop.active', $config['coop']['active']);
         $container->setParameter('ise_security.fetch_metadata.active', $config['fetch_metadata']['active']);
         
-	    $loader = new YamlFileLoader(
-	    	$container,
-	    	new FileLocator(__DIR__.'/../Resources/config')
-	    );
+        $loader = new YamlFileLoader(
+            $container,
+            new FileLocator(__DIR__.'/../Resources/config')
+        );
         $loader->load('services.yaml');
-
     }
 }

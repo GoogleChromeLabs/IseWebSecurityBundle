@@ -12,7 +12,8 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class IseWebSecurityFetchMetaTest extends TestCase
 {
-    public function testFetchMetaData() {
+    public function testFetchMetaData()
+    {
         $requestSubscriber = new RequestSubscriber(new Container(
             new ParameterBag(["ise_security.fetch_metadata.active" => true])
         ));

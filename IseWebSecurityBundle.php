@@ -7,7 +7,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class IseWebSecurityBundle extends Bundle
 {
-    public function build(ContainerBuilder $container): void 
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
     }

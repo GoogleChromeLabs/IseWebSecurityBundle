@@ -34,19 +34,22 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function getCOOP(): EnumNodeDefinition {
+    private function getCOOP(): EnumNodeDefinition
+    {
         $node = new EnumNodeDefinition('coop');
         $node->values(['none', 'cross-origin', 'same-site', 'same-origin', 'same-origin-allow-popups', 'report-only']);
         return $node;
     }
 
-    private function getCOEP(): EnumNodeDefinition {
+    private function getCOEP(): EnumNodeDefinition
+    {
         $node = new EnumNodeDefinition('coep');
         $node->values(['require-corp', 'report-only']);
         return $node;
     }
 
-    private function getFetchMetaData(): ArrayNodeDefinition {
+    private function getFetchMetaData(): ArrayNodeDefinition
+    {
         $node = new ArrayNodeDefinition('fetch_metadata');
         return $node;
     }
