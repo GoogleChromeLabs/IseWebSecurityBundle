@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/GoogleChromeLabs/IseWebSecurityBundle.svg?branch=main)](https://travis-ci.com/GoogleChromeLabs/IseWebSecurityBundle)
+[![Coverage Status](https://coveralls.io/repos/github/GoogleChromeLabs/IseWebSecurityBundle/badge.svg?branch=ci)](https://coveralls.io/github/GoogleChromeLabs/IseWebSecurityBundle?branch=ci)
 
 # 🔐 IseWebSecurityBundle
 
@@ -40,10 +41,9 @@ the majority of the features.
 
 ```yaml
 ise_web_security:
-    coop:
-        active: true
-    fetch_metadata:
-        active: true
+        coop: true
+        fetch_metadata:
+                active: true
 ```
 
 ## 🤝 Contributing

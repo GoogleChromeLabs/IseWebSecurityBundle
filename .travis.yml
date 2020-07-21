@@ -4,8 +4,17 @@ php:
   - 7.2
   - 7.3
 
-install:
+before_script:
   - composer install
-  - ./vendor/bin/simple-phpunit install
 
-script: ./vendor/bin/simple-phpunit --bootstrap vendor/autoload.php tests
+script: 
+  - mkdir -p build/logs
+  - composer run-script test
+  - composer run-script lint
+
+after_success:
+  - travis_retry php vendor/bin/php-coveralls
+
+cache:
+  directories:
+    - "$HOME/.composer/cache/files"

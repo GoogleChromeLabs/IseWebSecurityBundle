@@ -29,13 +29,13 @@ class FetchMetadataRequestSubscriber implements EventSubscriberInterface
 
     public function requestEvent(RequestEvent $event): void
     {
-            $request = $event->getRequest();
-            if($this->active) {
-                if(!$this->fetchMetadataPolicy->applyPolicy($request)){
-                    $response = new Response('', Response::HTTP_FORBIDDEN);
-                    $response->headers->set('Vary', 'sec-fetch-site, sec-fetch-dest, sec-fetch-mode');
-                    $event->setResponse($response);
-                }
+        $request = $event->getRequest();
+        if ($this->active) {
+            if (!$this->fetchMetadataPolicy->applyPolicy($request)) {
+                $response = new Response('', Response::HTTP_FORBIDDEN);
+                $response->headers->set('Vary', 'sec-fetch-site, sec-fetch-dest, sec-fetch-mode');
+                $event->setResponse($response);
             }
+        }
     }
 }

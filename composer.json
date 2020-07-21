@@ -21,6 +21,13 @@
         "symfony/framework-bundle": "^4.3 || ^5.1"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^4.3 ||^5.1"
+        "symfony/phpunit-bridge": "^4.3 || ^5.1",
+        "php-coveralls/php-coveralls": "^2.2",
+        "friendsofphp/php-cs-fixer": "^2.16"
+    },
+    "scripts": {
+        "lint": "vendor/bin/php-cs-fixer -vvv fix --using-cache=no --dry-run .",
+        "lint-fix": "vendor/bin/php-cs-fixer -vvv fix --using-cache=no .",
+        "test": "vendor/bin/simple-phpunit --colors=always"
     }
 }

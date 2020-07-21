@@ -16,7 +16,7 @@ class ReportController extends AbstractController
     {
         $this->logger = $logger;
     }
-    /** 
+    /**
      * Report middleware for handling CSP requests.
      *
      * @param Request $req

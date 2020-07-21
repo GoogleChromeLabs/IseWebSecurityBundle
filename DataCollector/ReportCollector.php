@@ -10,7 +10,7 @@ class ReportCollector extends DataCollector
 {
     public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
-        if($request->headers->get('X-REPORT')) {
+        if ($request->headers->get('X-REPORT')) {
             $this->data = [
                 'csp-report' => $request->getContent()
             ];
@@ -22,12 +22,13 @@ class ReportCollector extends DataCollector
         $this->data = [];
     }
 
-    public function getName() 
+    public function getName()
     {
         return 'ise.web_security.report_collector';
     }
 
-    public function getContent() {
+    public function getContent()
+    {
         return $this->data['csp-report'];
     }
 }

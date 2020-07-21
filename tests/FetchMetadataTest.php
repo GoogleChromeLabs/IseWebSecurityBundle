@@ -13,7 +13,8 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class IseWebSecurityFetchMetaTest extends TestCase
 {
-    public function testFetchMetaDataSubscriber() {
+    public function testFetchMetaDataSubscriber()
+    {
         $fetchMetaPolicy = new FetchMetadataDefaultPolicy([]);
         $requestSubscriber = new FetchMetadataRequestSubscriber($fetchMetaPolicy, new Container(
             new ParameterBag(["ise_security.fetch_metadata.active" => true])
@@ -37,7 +38,8 @@ class IseWebSecurityFetchMetaTest extends TestCase
         $this->assertNull($result);
     }
 
-    public function testBCInPolicy() {
+    public function testBCInPolicy()
+    {
         $fetchMetaPolicy = new FetchMetadataDefaultPolicy([]);
 
         $request = Request::create('/test');
@@ -46,7 +48,8 @@ class IseWebSecurityFetchMetaTest extends TestCase
         $this->assertTrue($res);
     }
 
-    public function testSameOriginInPolicy() {
+    public function testSameOriginInPolicy()
+    {
         $fetchMetaPolicy = new FetchMetadataDefaultPolicy([]);
         $request = Request::create('/test');
 
@@ -63,7 +66,8 @@ class IseWebSecurityFetchMetaTest extends TestCase
         $this->assertTrue($res);
     }
 
-    public function testAllowTopLevelNavigation() {
+    public function testAllowTopLevelNavigation()
+    {
         $fetchMetaPolicy = new FetchMetadataDefaultPolicy([]);
 
         $request = Request::create('/test');
@@ -76,7 +80,8 @@ class IseWebSecurityFetchMetaTest extends TestCase
         $this->assertTrue($res);
     }
 
-    public function testDisallowPostRequest() {
+    public function testDisallowPostRequest()
+    {
         $fetchMetaPolicy = new FetchMetadataDefaultPolicy([]);
 
         $request = Request::create('/test');
@@ -89,7 +94,8 @@ class IseWebSecurityFetchMetaTest extends TestCase
         $this->assertFalse($res);
     }
 
-    public function testDisallowObjectEmbedRequests() {
+    public function testDisallowObjectEmbedRequests()
+    {
         $fetchMetaPolicy = new FetchMetadataDefaultPolicy([]);
 
         $request = Request::create('/test');
@@ -111,7 +117,8 @@ class IseWebSecurityFetchMetaTest extends TestCase
         $this->assertFalse($res);
     }
 
-    public function testDisallowNonNavRequests() {
+    public function testDisallowNonNavRequests()
+    {
         $fetchMetaPolicy = new FetchMetadataDefaultPolicy([]);
 
         $request = Request::create('/test');
@@ -133,7 +140,8 @@ class IseWebSecurityFetchMetaTest extends TestCase
         $this->assertFalse($res);
     }
 
-    public function testAllowedEndpointsRequest() {
+    public function testAllowedEndpointsRequest()
+    {
         $fetchMetaPolicy = new FetchMetadataDefaultPolicy(['/allowedEndpoint']);
 
         $request = Request::create('/allowedEndpoint');
@@ -144,6 +152,5 @@ class IseWebSecurityFetchMetaTest extends TestCase
 
         $res = $fetchMetaPolicy->applyPolicy($request);
         $this->assertTrue($res);
-
     }
 }

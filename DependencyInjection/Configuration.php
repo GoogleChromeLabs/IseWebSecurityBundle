@@ -15,7 +15,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('ise_web_security', 'array');
 
         $rootNode = $treeBuilder->getRootNode();
-//!Work in progress, config tree to be constructed in Issues #7 and #3
+        //!Work in progress, config tree to be constructed in Issues #7 and #3
         $rootNode
             ->children()
                 ->append($this->getReportConfig())
@@ -31,20 +31,23 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function getCOOP(): ScalarNodeDefinition {
+    private function getCOOP(): ScalarNodeDefinition
+    {
         $node = new ScalarNodeDefinition('coop');
         $node->defaultValue('same-origin');
         return $node;
     }
 
-    private function getCOEP(): EnumNodeDefinition {
+    private function getCOEP(): EnumNodeDefinition
+    {
         $node = new EnumNodeDefinition('coep');
         $node->defaultValue('require-corp')
             ->values(['require-corp', 'report-only']);
         return $node;
     }
 
-    private function getFetchmetaData() {
+    private function getFetchmetaData()
+    {
         $node = new ArrayNodeDefinition('fetch_metadata');
         $node->children()
             ->booleanNode('active')->defaultFalse()->end()
@@ -54,7 +57,8 @@ class Configuration implements ConfigurationInterface
         return $node;
     }
 
-    private function getReportConfig() {
+    private function getReportConfig()
+    {
         $node = new ScalarNodeDefinition('report_uri');
         $node->defaultNull();
         return $node;

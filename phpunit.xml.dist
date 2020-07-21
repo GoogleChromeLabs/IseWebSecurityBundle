@@ -3,11 +3,20 @@
 <phpunit 
     colors="true" 
     bootstrap="vendor/autoload.php"
-    stopOnFailure="false"    
+    stopOnFailure="false"   
+    verbose="true" 
 >
     <testsuites>
         <testsuite name="Ise Web security bundle test suite">
-            <directory suffix="Test.php">./Tests/</directory>
+            <directory suffix="Test.php">tests/</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">Policies/</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
 </phpunit>
