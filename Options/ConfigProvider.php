@@ -10,7 +10,17 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ConfigProvider implements ConfigProviderInterface
 {
+    /**
+     * Paths configuration, populated via container injection
+     *
+     * @var [mixed]
+     */
     private $paths;
+    /**
+     * Defaults configuration, merged with per path config to ensure defaults are overwritten
+     *
+     * @var [mixed]
+     */
     private $defaults;
 
     public function __construct($defaults = [], $paths = [])
@@ -30,11 +40,13 @@ class ConfigProvider implements ConfigProviderInterface
     {
         $uri = $request->getPathInfo() ?: '/';
         foreach ($this->paths as $pathReg => $options) {
+            //Check if there is a config that matches the ui
             if (preg_match('{'.$pathReg.'}i', $uri)) {
                 $options = array_merge($this->defaults, $options);
                 return $options;
             }
         }
+        //Return the defaults if no path configs are found
         return $this->defaults;
     }
 }
