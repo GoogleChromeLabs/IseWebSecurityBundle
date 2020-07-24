@@ -10,12 +10,12 @@ class FetchMetadataDefaultPolicy implements FetchMetadataPolicyInterface
 {
     /**
      * CorsEndpoints denotes the allowed cross origin endpoints as part of the Default Fetch metadata policy
-     * @var array
+     * @var array [string]
      * Example: [ '/images', '/api', '/health' ]
      */
     private $corsEndpoints;
 
-    public function __construct($corsEndpoints = [])
+    public function __construct($corsEndpoints)
     {
         $this->corsEndpoints = $corsEndpoints;
     }
