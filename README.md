@@ -37,7 +37,7 @@ Due to a lack of Symfony Flex recipe to do so automatically. In your projects `/
 
 The config within your Symfony project will control how the bundle works in your Application.
 Below, you will find an example config for the current state of the project that will activate
-the majority of the features.
+the majority of the features. The `ise_web_security.yaml.dist` is also an example of this file. 
 
 >ise_web_security.yaml
 
