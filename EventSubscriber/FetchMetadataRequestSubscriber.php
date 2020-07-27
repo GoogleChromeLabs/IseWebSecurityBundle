@@ -34,9 +34,10 @@ class FetchMetadataRequestSubscriber implements EventSubscriberInterface
         $fetchMetadataPolicy = $this->fetchMetadataPolicyProvider->getFetchMetadataPolicy($options['fetch_metadata']);
 
         if ($options['fetch_metadata']['active']) {
+            $response = new Response();
+            $response->headers->set('Vary', 'sec-fetch-site, sec-fetch-dest, sec-fetch-mode');
             if (!$fetchMetadataPolicy->applyPolicy($request)) {
-                $response = new Response('', Response::HTTP_FORBIDDEN);
-                $response->headers->set('Vary', 'sec-fetch-site, sec-fetch-dest, sec-fetch-mode');
+                $response->setStatusCode(Response::HTTP_UNAUTHORIZED);
                 $event->setResponse($response);
             }
         }
