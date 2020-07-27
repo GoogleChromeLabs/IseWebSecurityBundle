@@ -1,25 +1,41 @@
-parameters:
-  fetch_metadata_policy: 
-
 services:
   _defaults:
     autowire: true
     autoconfigure: true
 
+  Ise\WebSecurityBundle\:
+      resource: '../../'
+      exclude: '../../{DependencyInjection,tests,vendor,DataCollector}'
+
   ise_fetch_metadata.subscriber:
     class: Ise\WebSecurityBundle\EventSubscriber\FetchMetadataRequestSubscriber
     arguments: 
-      $fetchMetadataPolicy: '@?Ise\WebSecurityBundle\Policies\FetchMetadataDefaultPolicy'
+      $fetchMetadataPolicyProvider: '@Ise\WebSecurityBundle\Policies\FetchMetadataPolicyProvider'
+      $configProvider: '@Ise\WebSecurityBundle\Options\ConfigProvider'
 
   Ise\WebSecurityBundle\EventSubscriber\FetchMetadataRequestSubscriber: '@ise_fetch_metadata.subscriber'
   
   ise_fetch_metadata.default_policy:
     class: Ise\WebSecurityBundle\Policies\FetchMetadataDefaultPolicy
+    autowire: false
+    autoconfigure: false
     arguments:
-      - $corsEndpoints
+      $corsEndpoints: []
 
   Ise\WebSecurityBundle\Policies\FetchMetadataDefaultPolicy: '@ise_fetch_metadata.default_policy'
 
-  Ise\WebSecurityBundle\:
-      resource: '../../'
-      exclude: '../../{DependencyInjection,tests,vendor,DataCollector}'
+  ise_coop_coep.subscriber:
+    class: Ise\WebSecurityBundle\EventSubscriber\ResponseSubscriber
+    arguments:
+      $configProvider: '@Ise\WebSecurityBundle\Options\ConfigProvider'
+
+  Ise\WebSecurityBundle\EventSubscriber\ResponseSubscriber: '@ise_coop_coep.subscriber'
+
+  ise_config.provider:
+    class: Ise\WebSecurityBundle\Options\ConfigProvider
+    autowire: false
+    arguments:
+      $defaults: []
+      $paths: []
+
+  Ise\WebSecurityBundle\Options\ConfigProvider: '@ise_config.provider'

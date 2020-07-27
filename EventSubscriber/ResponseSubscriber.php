@@ -2,6 +2,7 @@
 
 namespace Ise\WebSecurityBundle\EventSubscriber;
 
+use Ise\WebSecurityBundle\Options\ConfigProviderInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -9,10 +10,11 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class ResponseSubscriber implements EventSubscriberInterface
 {
-    private $active;
-    public function __construct(ContainerInterface $container)
+    private $configProvider;
+
+    public function __construct(ConfigProviderInterface $configProvider)
     {
-        $this->active = $container->getParameter('ise_security.coop.active');
+        $this->configProvider = $configProvider;
     }
 
     public static function getSubscribedEvents()
@@ -28,12 +30,18 @@ class ResponseSubscriber implements EventSubscriberInterface
     {
         //!WIP, to be broken out into policy handler class
         $response = $event->getResponse();
-        if ($this->active) {
-            $response->headers->set("Cross-Origin-Resource-Policy", "same-origin");
-            $response->headers->set("Content-Security-Policy-Report-Only", 'default-src');
-            $response->headers->set('Cross-Origin-Opener-Policy', 'same-origin');
-            $response->headers->set('Cross-Origin-Embedder-Policy', 'require-corp');
+        $request = $event->getRequest();
+
+        $options = $this->configProvider->getPathConfig($request);
+
+        if ($options['coop']['active']) {
+            $response->headers->set('Cross-Origin-Opener-Policy', $options['coop']['policy']);
         }
+
+        if ($options['coep']['active']) {
+            $response->headers->set('Cross-Origin-Embedder-Policy', $options['coep']['policy']);
+        }
+        
         $event->setResponse($response);
     }
 }

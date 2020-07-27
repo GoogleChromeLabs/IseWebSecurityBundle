@@ -5,20 +5,30 @@ namespace Ise\WebSecurityBundle\Tests;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Ise\WebSecurityBundle\EventSubscriber\FetchMetadataRequestSubscriber;
+use Ise\WebSecurityBundle\Policies\FetchMetadataPolicyProvider;
+use Ise\WebSecurityBundle\Options\ConfigProvider;
 use Ise\WebSecurityBundle\Policies\FetchMetadataDefaultPolicy;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class IseWebSecurityFetchMetaTest extends TestCase
+class IseWebSecurityFetchMetadataPolicyTest extends TestCase
 {
+    private $defaults = [
+        'fetch_metadata' => [
+            'active' => true,
+            'policy' => null,
+            'allowed_endpoints' => []
+        ]
+    ];
+
     public function testFetchMetaDataSubscriber()
     {
         $fetchMetaPolicy = new FetchMetadataDefaultPolicy([]);
-        $requestSubscriber = new FetchMetadataRequestSubscriber($fetchMetaPolicy, new Container(
-            new ParameterBag(["ise_security.fetch_metadata.active" => true])
-        ));
+        $requestSubscriber = new FetchMetadataRequestSubscriber(
+            new FetchMetadataPolicyProvider,
+            new ConfigProvider($this->defaults, [])
+        );
+        
         $req = Request::create(
             '/blog'
         );
