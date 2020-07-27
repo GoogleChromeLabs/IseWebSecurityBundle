@@ -11,7 +11,7 @@ services:
     class: Ise\WebSecurityBundle\EventSubscriber\FetchMetadataRequestSubscriber
     arguments: 
       $fetchMetadataPolicyProvider: '@Ise\WebSecurityBundle\Policies\FetchMetadataPolicyProvider'
-      $configProvider: '@Ise\WebSecurityBundle\Options\ConfigurationProvider'
+      $configProvider: '@Ise\WebSecurityBundle\Options\ConfigProvider'
 
   Ise\WebSecurityBundle\EventSubscriber\FetchMetadataRequestSubscriber: '@ise_fetch_metadata.subscriber'
   
@@ -27,15 +27,15 @@ services:
   ise_coop_coep.subscriber:
     class: Ise\WebSecurityBundle\EventSubscriber\ResponseSubscriber
     arguments:
-      $configProvider: '@Ise\WebSecurityBundle\Options\ConfigurationProvider'
+      $configProvider: '@Ise\WebSecurityBundle\Options\ConfigProvider'
 
   Ise\WebSecurityBundle\EventSubscriber\ResponseSubscriber: '@ise_coop_coep.subscriber'
 
   ise_config.provider:
-    class: Ise\WebSecurityBundle\Options\ConfigurationProvider
+    class: Ise\WebSecurityBundle\Options\ConfigProvider
     autowire: false
     arguments:
       $defaults: []
       $paths: []
 
-  Ise\WebSecurityBundle\Options\ConfigurationProvider: '@ise_config.provider'
+  Ise\WebSecurityBundle\Options\ConfigProvider: '@ise_config.provider'
