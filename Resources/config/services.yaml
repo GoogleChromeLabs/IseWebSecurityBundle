@@ -12,6 +12,8 @@ services:
     arguments: 
       $fetchMetadataPolicyProvider: '@Ise\WebSecurityBundle\Policies\FetchMetadataPolicyProvider'
       $configProvider: '@Ise\WebSecurityBundle\Options\ConfigProvider'
+    tags:
+      - { name: monolog.logger, channel: security }
 
   Ise\WebSecurityBundle\EventSubscriber\FetchMetadataRequestSubscriber: '@ise_fetch_metadata.subscriber'
   
