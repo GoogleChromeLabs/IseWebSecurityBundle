@@ -17,7 +17,7 @@ presets:
     coep:
       active: true
       policy: 'unsafe-none'
-    fetch_metdata:
+    fetch_metadata:
       active: false
       allowed_endpoints: []
   same_site_restricted:
