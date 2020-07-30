@@ -44,7 +44,7 @@ class ConfigProvider implements ConfigProviderInterface
     {
         $uri = $request->getPathInfo() ?? '/';
         foreach ($this->paths as $pathReg => $options) {
-            //Remove NULL's to prevent overwriting with defaults. 
+            //Remove NULL's to prevent overwriting with defaults.
             $options = array_filter($options);
             //Check if there is a config that matches the URI
 
