@@ -19,6 +19,8 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode('defaults')
+                    ->addDefaultsIfNotSet()
+                    ->append($this->getPreset())
                     ->append($this->getReportConfig())
                     ->append($this->getCOEP())
                     ->append($this->getCOOP())
@@ -29,6 +31,7 @@ class Configuration implements ConfigurationInterface
                     ->useAttributeAsKey('path')
                     ->normalizeKeys(false)
                     ->prototype('array')
+                        ->append($this->getPreset())
                         ->append($this->getReportConfig())
                         ->append($this->getCOEP())
                         ->append($this->getCOOP())
@@ -45,9 +48,9 @@ class Configuration implements ConfigurationInterface
         $node = new ArrayNodeDefinition('coop');
         $node
         ->children()
-            ->booleanNode('active')->defaultTrue()->end()
-            ->booleanNode('policy_overwrite')->defaultFalse()->end()
-            ->scalarNode('policy')->defaultValue('same-origin')->end()
+            ->booleanNode('active')->end()
+            ->booleanNode('policy_overwrite')->end()
+            ->scalarNode('policy')->end()
         ->end();
         return $node;
     }
@@ -57,9 +60,9 @@ class Configuration implements ConfigurationInterface
         $node = new ArrayNodeDefinition('coep');
         $node
         ->children()
-            ->booleanNode('active')->defaultTrue()->end()
-            ->booleanNode('policy_overwrite')->defaultFalse()->end()
-            ->scalarNode('policy')->defaultValue('require-corp')->end()
+            ->booleanNode('active')->end()
+            ->booleanNode('policy_overwrite')->end()
+            ->scalarNode('policy')->end()
         ->end();
         return $node;
     }
@@ -68,9 +71,9 @@ class Configuration implements ConfigurationInterface
     {
         $node = new ArrayNodeDefinition('fetch_metadata');
         $node->children()
-            ->booleanNode('active')->defaultFalse()->end()
-            ->scalarNode('policy')->defaultNull()->end()
-            ->arrayNode('allowed_endpoints')->prototype('scalar')->defaultValue(array())->end()
+            ->booleanNode('active')->end()
+            ->scalarNode('policy')->end()
+            ->arrayNode('allowed_endpoints')->prototype('scalar')->end()
         ->end();
         return $node;
     }
@@ -78,7 +81,12 @@ class Configuration implements ConfigurationInterface
     private function getReportConfig()
     {
         $node = new ScalarNodeDefinition('report_uri');
-        $node->defaultNull();
+        return $node;
+    }
+
+    private function getPreset()
+    {
+        $node = new ScalarNodeDefinition('preset');
         return $node;
     }
 }
