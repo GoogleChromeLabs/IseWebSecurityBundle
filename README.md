@@ -33,6 +33,8 @@ Due to a lack of Symfony Flex recipe to do so automatically. In your projects `/
 
 ## Config
 
+More Config details can be found [here](https://github.com/GoogleChromeLabs/IseWebSecurityBundle/wiki/Configuration)
+
 >WIP, Config will change over time
 
 The config within your Symfony project will control how the bundle works in your Application.
@@ -57,6 +59,10 @@ ise_web_security:
             fetch_metadata:
                 allowed_endpoints: ['/images']
 ```
+
+## Wiki
+
+This Repo has a wiki! Check it out [here](https://github.com/GoogleChromeLabs/IseWebSecurityBundle/wiki)
 
 ## 🤝 Contributing
 
