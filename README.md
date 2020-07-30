@@ -43,23 +43,19 @@ the majority of the features. The `ise_web_security.yaml.dist` is also an exampl
 
 ```yaml
 ise_web_security:
-        defaults:
+    defaults: 
+        preset: 'full'
+    paths:
+        '^/public':
             coop:
                 active: false
             coep:
-                active: true
-                policy: 'require-corp'
+                active: false
             fetch_metadata:
-                active: true
-        paths:
-            '^/user':
-                coop:
-                    active: true
-                    policy: 'same-origin'
-                coep:
-                    active: false
-                fetch_metadata: 
-                    active: false
+                active: false
+        '^/admin':
+            fetch_metadata:
+                allowed_endpoints: ['/images']
 ```
 
 ## 🤝 Contributing
