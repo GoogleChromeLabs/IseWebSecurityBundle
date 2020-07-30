@@ -26,8 +26,15 @@ class IseWebSecurityExtension extends Extension
         );
         $loader->load('services.yaml');
         
+        $presets = Yaml::parseFile(__DIR__.'/../Resources/config/presets.yaml')['presets'];
+        
+        if (isset($defaults['preset'])) {
+            $defaults = array_merge($defaults, $presets[$defaults['preset']]);
+        }
+        
         $configProvider = $container->getDefinition('ise_config.provider');
         $configProvider->setArgument('$defaults', $defaults);
         $configProvider->setArgument('$paths', $config['paths']);
+        $configProvider->setArgument('$presets', $presets);
     }
 }

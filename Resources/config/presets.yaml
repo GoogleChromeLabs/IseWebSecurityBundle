@@ -1,0 +1,32 @@
+# Work in progress. Changes need to be made to accommodate reporting headers. At present COOP and COEP do not have reporting endpoints available.
+presets:
+  full:
+    coop:
+      active: true
+      policy: 'same-origin'
+    coep: 
+      active: true
+      policy: 'require-corp'
+    fetch_metadata:
+      active: true
+      allowed_endpoints: []
+  public:
+    coop:
+      active: true
+      policy: 'cross-site'
+    coep:
+      active: true
+      policy: 'unsafe-none'
+    fetch_metdata:
+      active: false
+      allowed_endpoints: []
+  same_site_restricted:
+    coop:
+      active: true
+      policy: 'same-site'
+    coep:
+      active: true
+      policy: 'require-corp'
+    fetch_metadata:
+      active: true
+      allowed_endpoints: []
