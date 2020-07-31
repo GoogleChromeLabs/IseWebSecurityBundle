@@ -36,7 +36,7 @@ class ConfigProvider implements ConfigProviderInterface
      * If no config is found, the default config is returned.
      * If a config is found, then the default and the path config is merged and returned in $options.
      * Path config is order dependant. IF '^/api' comes before '^/' in the config, then '^/api' will be applied and '^/' disregarded provided the first matches.
-     * Presets overwrite ALL config for a route, such that any config made in a route is ignored in favour of the defined configuration.
+     * Path based config will overwrite corresponding config in presets. 
      * @param Request $request The request that is to be configured
      * @return array The Config to be applied to the Request.
      */
