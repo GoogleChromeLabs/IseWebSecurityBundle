@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ReportController extends AbstractController
 {
     private $logger;
-    private static $storageTest = [];
+
     
     public function __construct(LoggerInterface $logger)
     {
@@ -24,13 +24,8 @@ class ReportController extends AbstractController
      */
     public function report(Request $req)
     {
-        $this->logger->info($req->getContent());
-        array_push(ReportController::$storageTest, $req->getContent());
+        $this->logger->debug($req->getContent());
         $res = new JsonResponse($req->getContent());
         return $res;
-    }
-    public function index(Request $req)
-    {
-        return new JsonResponse(ReportController::$storageTest);
     }
 }

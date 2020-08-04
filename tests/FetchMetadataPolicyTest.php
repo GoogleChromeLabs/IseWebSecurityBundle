@@ -8,6 +8,7 @@ use Ise\WebSecurityBundle\EventSubscriber\FetchMetadataRequestSubscriber;
 use Ise\WebSecurityBundle\Policies\FetchMetadataPolicyProvider;
 use Ise\WebSecurityBundle\Options\ConfigProvider;
 use Ise\WebSecurityBundle\Policies\FetchMetadataDefaultPolicy;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
@@ -24,9 +25,15 @@ class IseWebSecurityFetchMetadataPolicyTest extends TestCase
     public function testFetchMetaDataSubscriber()
     {
         $fetchMetaPolicy = new FetchMetadataDefaultPolicy([]);
+
+        $logger = $this->getMockBuilder(LoggerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $requestSubscriber = new FetchMetadataRequestSubscriber(
             new FetchMetadataPolicyProvider,
-            new ConfigProvider($this->defaults, [])
+            new ConfigProvider($this->defaults, []),
+            $logger
         );
         
         $req = Request::create(

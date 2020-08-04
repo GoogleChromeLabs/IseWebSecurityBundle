@@ -12,13 +12,13 @@ services:
     arguments: 
       $fetchMetadataPolicyProvider: '@Ise\WebSecurityBundle\Policies\FetchMetadataPolicyProvider'
       $configProvider: '@Ise\WebSecurityBundle\Options\ConfigProvider'
+    tags:
+      - { name: monolog.logger, channel: security }
 
   Ise\WebSecurityBundle\EventSubscriber\FetchMetadataRequestSubscriber: '@ise_fetch_metadata.subscriber'
   
   ise_fetch_metadata.default_policy:
     class: Ise\WebSecurityBundle\Policies\FetchMetadataDefaultPolicy
-    autowire: false
-    autoconfigure: false
     arguments:
       $corsEndpoints: []
 
@@ -33,7 +33,6 @@ services:
 
   ise_config.provider:
     class: Ise\WebSecurityBundle\Options\ConfigProvider
-    autowire: false
     arguments:
       $defaults: []
       $paths: []

@@ -3,7 +3,6 @@
 namespace Ise\WebSecurityBundle\Policies;
 
 use Ise\WebSecurityBundle\Policies\FetchMetadataPolicyInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class FetchMetadataDefaultPolicy implements FetchMetadataPolicyInterface
