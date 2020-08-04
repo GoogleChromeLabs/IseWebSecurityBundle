@@ -1,12 +1,6 @@
 ise_web_security:
     defaults: 
-        coop:
-            active: true
-        coep:
-            active: true
-        fetch_metadata:
-            active: true
-            allowed_endpoints: []
+        preset: 'full'
     paths:
         '^/public':
             coop:
@@ -15,3 +9,5 @@ ise_web_security:
                 active: false
             fetch_metadata:
                 active: false
+        '^/admin':
+            preset: 'full'

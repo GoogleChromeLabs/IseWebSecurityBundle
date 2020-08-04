@@ -33,6 +33,8 @@ Due to a lack of Symfony Flex recipe to do so automatically. In your projects `/
 
 ## Config
 
+More Config details can be found [here](https://github.com/GoogleChromeLabs/IseWebSecurityBundle/wiki/Configuration)
+
 >WIP, Config will change over time
 
 The config within your Symfony project will control how the bundle works in your Application.
@@ -43,24 +45,24 @@ the majority of the features. The `ise_web_security.yaml.dist` is also an exampl
 
 ```yaml
 ise_web_security:
-        defaults:
+    defaults: 
+        preset: 'full'
+    paths:
+        '^/public':
             coop:
                 active: false
             coep:
-                active: true
-                policy: 'require-corp'
+                active: false
             fetch_metadata:
-                active: true
-        paths:
-            '^/user':
-                coop:
-                    active: true
-                    policy: 'same-origin'
-                coep:
-                    active: false
-                fetch_metadata: 
-                    active: false
+                active: false
+        '^/admin':
+            fetch_metadata:
+                allowed_endpoints: ['/images']
 ```
+
+## Wiki
+
+This Repo has a wiki! Check it out [here](https://github.com/GoogleChromeLabs/IseWebSecurityBundle/wiki)
 
 ## 🤝 Contributing
 

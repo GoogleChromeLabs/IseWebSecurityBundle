@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 class IseWebSecurityConfigProviderTest extends TestCase
 {
     protected $defaultOptions = [
+        'preset' => null,
         'fetch_metadata' => [
             'active' => true,
             'policy' => null,
@@ -28,6 +29,7 @@ class IseWebSecurityConfigProviderTest extends TestCase
     ];
 
     protected $routeMatch = [
+        'preset' => null,
         'fetch_metadata' => [
             'active' => false,
             'policy' => null,
@@ -46,6 +48,7 @@ class IseWebSecurityConfigProviderTest extends TestCase
     ];
 
     protected $routeExactMatch = [
+        'preset' => null,
         'fetch_metadata' => [
             'active' => false,
             'policy' => null,
@@ -64,6 +67,7 @@ class IseWebSecurityConfigProviderTest extends TestCase
     ];
 
     protected $routeNoMatch = [
+        'preset' => null,
         'fetch_metadata' => [
             'active' => false,
             'policy' => null,
@@ -82,6 +86,45 @@ class IseWebSecurityConfigProviderTest extends TestCase
     ];
 
     protected $routeOverwrite = [
+        'preset' => null,
+        'fetch_metadata' => [
+            'active' => false,
+            'policy' => 'App\A\Random\Thing',
+            'allowed_origins' => ['/orign1','/origin2']
+        ],
+        'coop' => [
+            'active' => false,
+            'policy' => 'no match',
+            'policy_overwrite' => true
+        ],
+        'coep' => [
+            'active' => false,
+            'policy' => 'no match',
+            'policy_overwrite' => true
+        ]
+    ];
+
+    protected $fullPreset = [
+        'preset' => 'full',
+        'fetch_metadata' => [
+            'active' => false,
+            'policy' => 'App\A\Random\Preset',
+            'allowed_origins' => ['/orign1','/origin2']
+        ],
+        'coop' => [
+            'active' => true,
+            'policy' => 'preset',
+            'policy_overwrite' => true
+        ],
+        'coep' => [
+            'active' => false,
+            'policy' => 'preset',
+            'policy_overwrite' => true
+        ]
+    ];
+
+    protected $routeOverwritePreset = [
+        'preset' => 'full',
         'fetch_metadata' => [
             'active' => false,
             'policy' => 'App\A\Random\Thing',
@@ -144,6 +187,25 @@ class IseWebSecurityConfigProviderTest extends TestCase
         );
     }
 
+    public function testPresetOverwrite(): void
+    {
+        $provider = $this->getProvider();
+        $this->assertEquals(
+            $this->fullPreset,
+            $provider->getPathConfig(Request::create('/full/preset'))
+        );
+    }
+
+    public function testPathOverwritePreset(): void
+    {
+        $provider = $this->getProvider();
+
+        $this->assertEquals(
+            $this->routeOverwritePreset,
+            $provider->getPathConfig(Request::create('/overwrite/preset'))
+        );
+    }
+
     public function getProvider(): ConfigProviderInterface
     {
         return new ConfigProvider(
@@ -151,8 +213,15 @@ class IseWebSecurityConfigProviderTest extends TestCase
             [
                 '/test/exact' => $this->routeExactMatch,
                 '^/test/regex' => $this->routeMatch,
-                '/no/match' =>$this->routeNoMatch,
-                '/full/overwrite' =>$this->routeOverwrite
+                '/no/match' => $this->routeNoMatch,
+                '/full/overwrite' => $this->routeOverwrite,
+                '/full/preset' => [
+                    'preset' => 'full'
+                ],
+                '/overwrite/preset' => $this->routeOverwritePreset
+            ],
+            [
+                'full' => $this->fullPreset
             ]
         );
     }

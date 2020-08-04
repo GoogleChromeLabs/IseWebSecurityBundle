@@ -36,5 +36,6 @@ services:
     arguments:
       $defaults: []
       $paths: []
+      $presets: []
 
   Ise\WebSecurityBundle\Options\ConfigProvider: '@ise_config.provider'
