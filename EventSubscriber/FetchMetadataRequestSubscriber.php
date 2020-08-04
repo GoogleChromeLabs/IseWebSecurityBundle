@@ -16,14 +16,13 @@ class FetchMetadataRequestSubscriber implements EventSubscriberInterface
     private $fetchMetadataPolicyProvider;
     private $configProvider;
     private $logger;
-    private $requestBlockedMessage;
+    private $requestBlockedMessage = '%1$s request from host %2$s blocked by Fetch Metadata Policy: %3$s';
 
     public function __construct(FetchMetadataPolicyProvider $fetchMetadataPolicyProvider, ConfigProviderInterface $configProvider, LoggerInterface $securityLogger)
     {
         $this->fetchMetadataPolicyProvider = $fetchMetadataPolicyProvider;
         $this->configProvider = $configProvider;
         $this->logger = $securityLogger;
-        $this->requestBlockedMessage = '%1$s request from host %2$s blocked by Fetch Metadata Policy: %3$s';
     }
     public static function getSubscribedEvents()
     {
