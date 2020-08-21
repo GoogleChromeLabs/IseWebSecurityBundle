@@ -37,9 +37,12 @@ class TrustedTypesSubscriber implements EventSubscriberInterface
         $response->headers->set("Content-Security-Policy", $this->constructTrustedTypesHeader($options['trusted_types'], $headerSet));
     }
 
-    private function constructTrustedTypesHeader($options, $headerSet) {
+    private function constructTrustedTypesHeader($options, $headerSet)
+    {
         $policies = "trusted-types ".implode(" ", $options['policies']);
-        $requireFor = "require-trusted-types-for ".implode(" ", array_map(function ($value) { return sprintf('\'%s\'', $value); }, $options['require_for']));
+        $requireFor = "require-trusted-types-for ".implode(" ", array_map(function ($value) {
+            return sprintf('\'%s\'', $value);
+        }, $options['require_for']));
         return sprintf("%s %s; %s;", $headerSet, $policies, $requireFor);
     }
 }
