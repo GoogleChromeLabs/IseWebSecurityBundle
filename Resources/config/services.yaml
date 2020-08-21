@@ -31,6 +31,13 @@ services:
 
   Ise\WebSecurityBundle\EventSubscriber\ResponseSubscriber: '@ise_coop_coep.subscriber'
 
+  Ise\WebSecurityBundle\EventSubscriber\TrustedTypesSubscriber: '@ise_trusted_types.subscriber'
+
+  ise_trusted_types.subscriber:
+    class: Ise\WebSecurityBundle\EventSubscriber\TrustedTypesSubscriber
+    arguments:
+      $configProvider: '@Ise\WebSecurityBundle\Options\ConfigProvider'
+
   ise_config.provider:
     class: Ise\WebSecurityBundle\Options\ConfigProvider
     arguments:
