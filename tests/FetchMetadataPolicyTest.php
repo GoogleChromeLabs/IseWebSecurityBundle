@@ -36,10 +36,6 @@ class IseWebSecurityFetchMetadataPolicyTest extends TestCase
             $logger
         );
         
-        $req = Request::create(
-            '/blog'
-        );
-
         $kernel = $this->getMockBuilder(HttpKernelInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
