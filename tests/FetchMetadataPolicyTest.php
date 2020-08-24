@@ -9,6 +9,7 @@ use Ise\WebSecurityBundle\Policies\FetchMetadataPolicyProvider;
 use Ise\WebSecurityBundle\Options\ConfigProvider;
 use Ise\WebSecurityBundle\Policies\FetchMetadataDefaultPolicy;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
@@ -48,6 +49,38 @@ class IseWebSecurityFetchMetadataPolicyTest extends TestCase
         );
 
         $result = $requestSubscriber->requestEvent($res);
+        $this->assertNull($result);
+    }
+
+    public function testSubscriberRejection()
+    {
+        $fetchMetaPolicy = new FetchMetadataDefaultPolicy([]);
+
+        $logger = $this->getMockBuilder(LoggerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $requestSubscriber = new FetchMetadataRequestSubscriber(
+            new FetchMetadataPolicyProvider,
+            new ConfigProvider($this->defaults, []),
+            $logger
+        );
+        
+        $kernel = $this->getMockBuilder(HttpKernelInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $request = Request::create('/test', 'PUT');
+        $request->headers->set('sec-fetch-dest', 'object');
+        $request->headers->set('sec-fetch-site', 'cross-origin');
+        $res = new RequestEvent(
+            $kernel,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST
+        );
+
+        $result = $requestSubscriber->requestEvent($res);
+        $this->assertEquals($res->getResponse()->getStatusCode(), Response::HTTP_UNAUTHORIZED);
         $this->assertNull($result);
     }
 
