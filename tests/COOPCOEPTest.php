@@ -72,4 +72,3 @@ class COOPCOEPTest extends TestCase
         $this->assertEquals($res->getResponse()->headers->get('Cross-Origin-Embedder-Policy'), $this->coep);
     }
 }
-    
