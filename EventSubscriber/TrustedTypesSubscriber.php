@@ -3,11 +3,14 @@
 namespace Ise\WebSecurityBundle\EventSubscriber;
 
 use Ise\WebSecurityBundle\Options\ConfigProviderInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
+/**
+ * TrustedTypesSubscriber
+ * Request subscriber for implementing the Trusted Types CSP policy. This subscriber will work with already defined CSP policies.
+ */
 class TrustedTypesSubscriber implements EventSubscriberInterface
 {
     private $configProvider;
@@ -21,7 +24,7 @@ class TrustedTypesSubscriber implements EventSubscriberInterface
     {
         return [
             KernelEvents::RESPONSE => [
-                ['responseEvent', 0],
+                ['responseEvent', -512],
             ]
         ];
     }
@@ -33,10 +36,21 @@ class TrustedTypesSubscriber implements EventSubscriberInterface
 
         $options = $this->configProvider->getPathConfig($request);
 
-        $headerSet = $response->headers->has("Content-Security-Policy") ? ";" : "";
-        $response->headers->set("Content-Security-Policy", $this->constructTrustedTypesHeader($options['trusted_types'], $headerSet));
+        //Check if CSP header is set
+        $headerSet = $response->headers->has("Content-Security-Policy");
+        //If CSP header is set, pull it and append a ';' separator, else set an empty prefix.
+        $headerPrefix = $headerSet ? $response->headers->get("Content-Security-Policy").';' : '';
+        //Set trusted types CSP policy, and append it to the current policy if one exists
+        $response->headers->set("Content-Security-Policy", $this->constructTrustedTypesHeader($options['trusted_types'], $headerPrefix));
     }
 
+    /**
+     * constructTrustedTypesHeader method constructs the CSP policy for trusted types. If a CSP policy already exists, the trusted types policy is appended to it.
+     *
+     * @param Array $options
+     * @param String $headerSet
+     * @return String
+     */
     private function constructTrustedTypesHeader($options, $headerSet)
     {
         $policies = "trusted-types ".implode(" ", $options['policies']);

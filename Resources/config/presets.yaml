@@ -20,6 +20,8 @@ presets:
     fetch_metadata:
       active: false
       allowed_endpoints: []
+    trusted_types:
+      active: false
   same_site_restricted:
     coop:
       active: true
@@ -30,3 +32,5 @@ presets:
     fetch_metadata:
       active: true
       allowed_endpoints: []
+    trusted_types:
+      active: false
