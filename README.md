@@ -58,6 +58,11 @@ ise_web_security:
         '^/admin':
             fetch_metadata:
                 allowed_endpoints: ['/images']
+            trusted_types:
+                active: true
+                polices: ['foo', 'bar']
+                require_for: ['script', 'style']
+
 ```
 
 ## Wiki
