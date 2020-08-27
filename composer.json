@@ -1,5 +1,5 @@
 {
-    "name": "googlechromelabs/web-security-bundle",
+    "name": "googlechromelabs/ise-web-security-bundle",
     "description": "Web security bundle for Symfony create by google OSS",
     "type": "symfony-bundle",
     "license": "Apache-2.0",
