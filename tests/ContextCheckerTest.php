@@ -8,8 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Log\Logger;
 
 class IseWebSecurityContextCheckerTest extends TestCase
-{ 
-    function testSecureContext() {
+{
+    public function testSecureContext()
+    {
         $logger = $this->getMockBuilder(Logger::class)
             ->disableOriginalConstructor()
             ->getMock();
