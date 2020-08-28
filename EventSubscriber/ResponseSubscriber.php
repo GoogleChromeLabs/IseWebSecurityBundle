@@ -3,18 +3,20 @@
 namespace Ise\WebSecurityBundle\EventSubscriber;
 
 use Ise\WebSecurityBundle\Options\ConfigProviderInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Ise\WebSecurityBundle\Options\ContextChecker;
 
 class ResponseSubscriber implements EventSubscriberInterface
 {
     private $configProvider;
+    private $context;
 
-    public function __construct(ConfigProviderInterface $configProvider)
+    public function __construct(ConfigProviderInterface $configProvider, ContextChecker $context)
     {
         $this->configProvider = $configProvider;
+        $this->context = $context;
     }
 
     public static function getSubscribedEvents()
@@ -34,11 +36,14 @@ class ResponseSubscriber implements EventSubscriberInterface
 
         $options = $this->configProvider->getPathConfig($request);
 
+
         if ($options['coop']['active']) {
+            $this->context->checkSecure($request, 'COOP');
             $response->headers->set('Cross-Origin-Opener-Policy', $options['coop']['policy']);
         }
 
         if ($options['coep']['active']) {
+            $this->context->checkSecure($request, 'COEP');
             $response->headers->set('Cross-Origin-Embedder-Policy', $options['coep']['policy']);
         }
         
