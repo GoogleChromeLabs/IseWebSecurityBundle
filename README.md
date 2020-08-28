@@ -13,21 +13,9 @@ including:
 
 # 🖥️ Usage
 
->WIP, package not currently published. 
+Install the package from Packagist:
 
-To install the bundle on a project, add the following lines to your composer.json
-
-```json
-"require": {
-    "ise/web-security-bundle": "dev-main"
-},
-"repositories": [
-    {
-        "type": "vcs",
-        "url": "https://github.com/GoogleChromeLabs/IseWebSecurityBundle.git"
-    }
-]
-```
+`composer require googlechromelabs/ise-web-security-bundle`
 
 Due to a lack of Symfony Flex recipe to do so automatically. In your projects `/config/packages` folder, create `ise_web_security.yaml` and populate it with the yaml config detailed below. 
 
@@ -35,7 +23,6 @@ Due to a lack of Symfony Flex recipe to do so automatically. In your projects `/
 
 More Config details can be found [here](https://github.com/GoogleChromeLabs/IseWebSecurityBundle/wiki/Configuration)
 
->WIP, Config will change over time
 
 The config within your Symfony project will control how the bundle works in your Application.
 Below, you will find an example config for the current state of the project that will activate
