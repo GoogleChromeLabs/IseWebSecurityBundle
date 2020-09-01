@@ -25,6 +25,7 @@ class Configuration implements ConfigurationInterface
                     ->append($this->getCOEP())
                     ->append($this->getCOOP())
                     ->append($this->getFetchmetaData())
+                    ->append($this->getTrustedTypes())
                 ->end()
 
                 ->arrayNode('paths')
@@ -36,6 +37,7 @@ class Configuration implements ConfigurationInterface
                         ->append($this->getCOEP())
                         ->append($this->getCOOP())
                         ->append($this->getFetchmetaData())
+                        ->append($this->getTrustedTypes())
                     ->end()
             ->end()
         ;
@@ -74,6 +76,17 @@ class Configuration implements ConfigurationInterface
             ->booleanNode('active')->end()
             ->scalarNode('policy')->end()
             ->arrayNode('allowed_endpoints')->prototype('scalar')->end()
+        ->end();
+        return $node;
+    }
+
+    private function getTrustedTypes()
+    {
+        $node = new ArrayNodeDefinition('trusted_types');
+        $node->children()
+            ->booleanNode('active')->end()
+            ->arrayNode('policies')->prototype('scalar')->end()->end()
+            ->arrayNode('require_for')->prototype('scalar')->end()
         ->end();
         return $node;
     }
