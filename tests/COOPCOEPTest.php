@@ -4,7 +4,9 @@ namespace Ise\WebSecurityBundle\Tests;
 
 use Ise\WebSecurityBundle\EventSubscriber\ResponseSubscriber;
 use Ise\WebSecurityBundle\Options\ConfigProvider;
+use Ise\WebSecurityBundle\Options\ContextChecker;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -28,8 +30,13 @@ class COOPCOEPTest extends TestCase
 
     public function testCOOP()
     {
+        $logger = $this->getMockBuilder(LoggerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $context = new ContextChecker($logger);
         $requestSub = new ResponseSubscriber(
-            new ConfigProvider($this->default, [])
+            new ConfigProvider($this->default, []),
+            $context
         );
 
         $kernel = $this->getMockBuilder(HttpKernelInterface::class)
@@ -51,8 +58,13 @@ class COOPCOEPTest extends TestCase
 
     public function testCOEP()
     {
+        $logger = $this->getMockBuilder(LoggerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $context = new ContextChecker($logger);
         $requestSub = new ResponseSubscriber(
-            new ConfigProvider($this->default, [])
+            new ConfigProvider($this->default, []),
+            $context
         );
 
         $kernel = $this->getMockBuilder(HttpKernelInterface::class)
