@@ -4,7 +4,9 @@ namespace Ise\WebSecurityBundle\Tests;
 
 use Ise\WebSecurityBundle\EventSubscriber\TrustedTypesSubscriber;
 use Ise\WebSecurityBundle\Options\ConfigProvider;
+use Ise\WebSecurityBundle\Options\ContextChecker;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -26,8 +28,16 @@ class IseTrustedTypesPolicyTest extends TestCase
 
     public function testTrustedTypesSubscriberBase()
     {
+        $logger = $this->getMockBuilder(LoggerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $context = new ContextChecker($logger);
+        
         $requestSub = new TrustedTypesSubscriber(
-            new ConfigProvider($this->defaults, [])
+            new ConfigProvider($this->defaults, []),
+            $context,
+            $logger
         );
 
         $kernel = $this->getMockBuilder(HttpKernelInterface::class)
@@ -49,8 +59,16 @@ class IseTrustedTypesPolicyTest extends TestCase
 
     public function testTrustedTypesSubscriberCSPPrefix()
     {
+        $logger = $this->getMockBuilder(LoggerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $context = new ContextChecker($logger);
+        
         $requestSub = new TrustedTypesSubscriber(
-            new ConfigProvider($this->defaults, [])
+            new ConfigProvider($this->defaults, []),
+            $context,
+            $logger
         );
 
         $kernel = $this->getMockBuilder(HttpKernelInterface::class)
